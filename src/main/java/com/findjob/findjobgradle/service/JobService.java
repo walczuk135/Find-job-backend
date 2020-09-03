@@ -36,7 +36,7 @@ public class JobService {
     }
 
     public Optional<Job> getJobOfferById(long id) {
-        return jobRepository.findById(id);//.orElseThrow(() -> new JobExceptionHandler("No job offers with this id found !")));
+        return jobRepository.findById(id);
     }
 
     public List<Job> getALLJobOffer() {

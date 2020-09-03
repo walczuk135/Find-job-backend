@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -37,6 +39,8 @@ public class Job {
     @Column(name = "user_fk")
     Long userId;
 
+    @OneToMany(mappedBy = "jobId",fetch = FetchType.LAZY,cascade = CascadeType.REMOVE,orphanRemoval = true)
+    private Set<DocumentFile> files;
 
     @OneToOne(mappedBy = "job", cascade = {CascadeType.ALL},
             fetch = FetchType.LAZY, optional = false)
@@ -52,6 +56,7 @@ public class Job {
         this.company = company;
         this.city = city;
         this.published = published;
+        this.files=new HashSet<>();
     }
 
     public void setJobDetails(JobDetails jobDetails) {
